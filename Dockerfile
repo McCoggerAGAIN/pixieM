@@ -4,7 +4,10 @@ FROM python:3.10-slim-buster
 WORKDIR /app
 
 # Install git
-RUN apt-get update && apt-get install -y git
+RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list && \
+    sed -i 's|http://deb.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y git
+
 
 # Clone the repository
 RUN git clone https://github.com/McCoggerAGAIN/pixieM .
